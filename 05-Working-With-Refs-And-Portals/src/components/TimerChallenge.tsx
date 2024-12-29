@@ -6,34 +6,42 @@ type Props = {
   targetTime: number;
 };
 
+type ModalHandle = {
+  open: () => void;
+};
+
 const TimerChallenge: React.FC<Props> = ({ title, targetTime }) => {
-  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
-  const dialog = useRef<HTMLDialogElement>(null);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dialog = useRef<ModalHandle>(null);
   const [timerActive, setTimerActive] = useState(false);
-  // const [timerExpired, setTimerExpired] = useState(false);
+  const [stoppedTime, setStoppedTime] = useState<number>(0);
 
   const handleStart = () => {
-    timer.current = setTimeout(() => {
-      // setTimerExpired(true);
-      setTimerActive(false);
-      dialog.current?.showModal();
-    }, targetTime * 1000);
+    setStoppedTime(Date.now());
     setTimerActive(true);
+
+    timer.current = setTimeout(() => {
+      handleStop(false);
+    }, targetTime * 1003);
   };
 
-  const handleStop = () => {
+  const handleStop = (isClicked: boolean) => {
     if (!timer.current) return;
+
     clearTimeout(timer.current);
     setTimerActive(false);
-    // setTimerExpired(false);
+    if (isClicked)
+      setStoppedTime((prevState) => (Date.now() - prevState) / 1000);
+    else setStoppedTime(0);
+
+    dialog.current?.open();
   };
 
   return (
     <>
       <ResultModal
-        result="lost"
         targetTime={targetTime}
-        stopTime={targetTime}
+        stoppedTime={stoppedTime}
         ref={dialog}
       />
       <section className="challenge">
@@ -42,7 +50,7 @@ const TimerChallenge: React.FC<Props> = ({ title, targetTime }) => {
           {targetTime} {targetTime > 0 ? "seconds" : "second"}
         </p>
         <p>
-          <button onClick={timerActive ? handleStop : handleStart}>
+          <button onClick={timerActive ? () => handleStop(true) : handleStart}>
             {timerActive ? "Stop" : "Start"} Challenge
           </button>
         </p>
