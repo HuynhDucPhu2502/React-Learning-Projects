@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import ShoppingCartContext from "../store/shopping-cart-context";
 type Product = {
   id: string;
   image: string;
@@ -6,12 +8,27 @@ type Product = {
   description: string;
 };
 
-type Props = {
+type Item = {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+};
+
+type ShoppingCartContextType = {
+  shoppingCart: Item[];
   handleAddItemToCart: (productId: string) => void;
+  handleUpdateCartItemQuantity: (productId: string, quantity: number) => void;
+};
+
+type Props = {
   product: Product;
 };
 
-const Product: React.FC<Props> = ({ product, handleAddItemToCart }) => {
+const Product: React.FC<Props> = ({ product }) => {
+  const { handleAddItemToCart } =
+    useContext<ShoppingCartContextType>(ShoppingCartContext);
+
   return (
     <article className="product">
       <img src={product.image} alt={product.title} />

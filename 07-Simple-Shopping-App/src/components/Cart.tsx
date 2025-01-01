@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import ShoppingCartContext from "../store/shopping-cart-context";
+
 type Item = {
   id: string;
   name: string;
@@ -5,13 +8,17 @@ type Item = {
   quantity: number;
 };
 
-type Props = {
-  cart: Item[];
+type ShoppingCartContextType = {
+  shoppingCart: Item[];
+  handleAddItemToCart: (productId: string) => void;
   handleUpdateCartItemQuantity: (productId: string, quantity: number) => void;
 };
 
-const Cart: React.FC<Props> = ({ cart, handleUpdateCartItemQuantity }) => {
-  const totalPrice = cart.reduce(
+const Cart = () => {
+  const { shoppingCart, handleUpdateCartItemQuantity } =
+    useContext<ShoppingCartContextType>(ShoppingCartContext);
+
+  const totalPrice = shoppingCart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
@@ -19,10 +26,10 @@ const Cart: React.FC<Props> = ({ cart, handleUpdateCartItemQuantity }) => {
 
   return (
     <div id="cart">
-      {cart.length === 0 && <p>No items in cart!</p>}
-      {cart.length > 0 && (
+      {shoppingCart.length === 0 && <p>No items in cart!</p>}
+      {shoppingCart.length > 0 && (
         <ul id="cart-items">
-          {cart.map((cartItem) => {
+          {shoppingCart.map((cartItem) => {
             const formattedPrice = `$${cartItem.price.toFixed(2)}`;
 
             return (

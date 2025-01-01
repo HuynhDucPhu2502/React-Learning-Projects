@@ -1,11 +1,7 @@
 import { PRODUCTS_DATA } from "../products-data";
 import Product from "./Product";
 
-type Props = {
-  handleAddItemToCart: (productId: string) => void;
-};
-
-const Shop: React.FC<Props> = ({ handleAddItemToCart }) => {
+const Shop = () => {
   return (
     <>
       <section id="shop">
@@ -13,11 +9,7 @@ const Shop: React.FC<Props> = ({ handleAddItemToCart }) => {
         <ul id="products">
           {PRODUCTS_DATA.map((product) => (
             <li key={product.id}>
-              <Product
-                product={product}
-                handleAddItemToCart={handleAddItemToCart}
-                {...product}
-              />
+              <Product product={product} {...product} />
             </li>
           ))}
         </ul>
