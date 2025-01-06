@@ -2,8 +2,13 @@ import React, { useState } from "react";
 
 import { log } from "../../log.js";
 
+type CounterHistoryType = {
+  value: number;
+  id: number;
+};
+
 type Props = {
-  history: number[];
+  history: CounterHistoryType[];
 };
 
 type HistoryItemProps = {
@@ -31,8 +36,8 @@ const CounterHistory: React.FC<Props> = ({ history }) => {
 
   return (
     <ol>
-      {history.map((count, index) => (
-        <HistoryItem key={index} count={count} />
+      {history.map((history) => (
+        <HistoryItem key={history.id} count={history.value} />
       ))}
     </ol>
   );

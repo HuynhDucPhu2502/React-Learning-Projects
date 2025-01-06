@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { log } from "../log";
 
 type Props = {
@@ -27,4 +27,4 @@ const CounterConfigure: React.FC<Props> = ({ handleOnClick }) => {
   );
 };
 
-export default CounterConfigure;
+export default memo(CounterConfigure);
