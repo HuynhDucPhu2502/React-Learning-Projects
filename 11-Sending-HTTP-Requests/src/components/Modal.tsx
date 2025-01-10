@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 type Props = {
   open: boolean;
   children: React.ReactNode;
-  onClose: () => void;
+  onClose?: () => void;
 };
 
 const Modal: React.FC<Props> = ({ open, children, onClose }) => {

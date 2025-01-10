@@ -5,6 +5,8 @@ type Props = {
   places: Place[];
   fallbackText: string;
   onSelectPlace: (selectedPlace: Place) => void;
+  fetchingText?: string;
+  isLoading?: boolean;
 };
 
 const Places: React.FC<Props> = ({
@@ -12,13 +14,17 @@ const Places: React.FC<Props> = ({
   places,
   fallbackText,
   onSelectPlace,
+  fetchingText,
+  isLoading,
 }) => {
-  console.log(places);
   return (
     <section className="places-category">
       <h2>{title}</h2>
-      {places.length === 0 && <p className="fallback-text">{fallbackText}</p>}
-      {places.length > 0 && (
+      {isLoading && <p className="fallback-text">{fetchingText}</p>}
+      {!isLoading && places.length === 0 && (
+        <p className="fallback-text">{fallbackText}</p>
+      )}
+      {!isLoading && places.length > 0 && (
         <ul className="places">
           {places.map((place) => (
             <li key={place.id} className="place-item">
