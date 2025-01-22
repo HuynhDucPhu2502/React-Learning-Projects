@@ -10,6 +10,7 @@ import Modal from "./UI/Modal";
 import Button from "./UI/Button";
 
 import { Customer, Order } from "../types/models";
+import Error from "./UI/Error";
 
 const requestConfig = {
   method: "POST",
@@ -102,6 +103,8 @@ const Checkout = () => {
           <Input label="Postal Code" type="text" id="postal-code" />
           <Input label="City" type="text" id="city" />
         </div>
+
+        {error && <Error title="Failed to submit order" message={error} />}
 
         <p className="modal-actions">{actions}</p>
       </form>

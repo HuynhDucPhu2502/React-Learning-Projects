@@ -17,7 +17,6 @@ const Cart = () => {
 
   const handleClose = () => {
     hideCart();
-    console.log(progress === "cart");
   };
 
   return (

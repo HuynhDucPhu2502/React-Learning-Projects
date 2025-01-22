@@ -5,7 +5,7 @@ type Props = {
 
 const Error: React.FC<Props> = ({ title, message }) => {
   return (
-    <div className="error center">
+    <div className="error">
       <h2>{title}</h2>
       <p>{message}</p>
     </div>
