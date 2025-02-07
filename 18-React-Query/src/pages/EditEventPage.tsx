@@ -42,7 +42,6 @@ const EditEventPage = () => {
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["events"] });
-      queryClient.invalidateQueries({ queryKey: ["events", id] });
     },
     onSuccess: () => {
       navigate("..");
