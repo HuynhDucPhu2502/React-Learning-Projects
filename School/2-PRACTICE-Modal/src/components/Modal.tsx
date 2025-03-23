@@ -1,6 +1,6 @@
 const Modal = ({ onClose }: { onClose: () => void }) => {
   return (
-    <dialog className="h-screen w-full fixed inset-0 flex justify-center items-center bg-black/50 z-50">
+    <div className="h-screen fixed inset-0 flex justify-center items-center bg-black/50 z-50">
       <div className="w-fit border-2 border-black p-4 rounded-lg bg-white">
         <div className="space-y-4">
           <div className="flex flex-row justify-between items-center">
@@ -35,7 +35,7 @@ const Modal = ({ onClose }: { onClose: () => void }) => {
           </button>
         </div>
       </div>
-    </dialog>
+    </div>
   );
 };
 
