@@ -21,6 +21,7 @@ export const Calculator = () => {
       <h1 className="text-2xl font-bold text-center mb-4">Máy Tính Đơn Giản</h1>
       <div className="flex justify-center items-center space-x-4 mb-4">
         <input
+        
           type="number"
           className="p-2 border-2 border-gray-300 rounded"
           placeholder="Nhập số thứ 1"
